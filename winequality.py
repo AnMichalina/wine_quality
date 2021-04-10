@@ -23,13 +23,78 @@ col_names = ['fixed_acidity','volatile_acidity', 'citric_acid', 'residual_sugar'
 
 df.columns = col_names
 
-df.info()
-print (df.isnull().values.any())
-print (df.isna().sum())
 
 
 
-print(round(df.describe(),2))
+df.loc[df['fixed_acidity']<= 4.60, 'fixed_acidity'] =0
+df.loc[(df['fixed_acidity'] > 4.60) & (df['fixed_acidity']<=7.10),'fixed_acidity'] =1
+df.loc[(df['fixed_acidity'] > 7.10) & (df['fixed_acidity']<=7.90), 'fixed_acidity'] =2
+df.loc[(df['fixed_acidity'] > 7.90) & (df['fixed_acidity'] <= 9.20), 'fixed_acidity'] =3
+df.loc[df['fixed_acidity'] > 9.20, 'fixed_acidity'] =4
+
+df.loc[df['volatile_acidity']<= 0.12, 'volatile_acidity'] =0
+df.loc[(df['volatile_acidity'] > 0.12) & (df['volatile_acidity']<=0.39),'volatile_acidity'] =1
+df.loc[(df['volatile_acidity'] > 0.39) & (df['volatile_acidity']<=0.52), 'volatile_acidity'] =2
+df.loc[(df['volatile_acidity'] > 0.52) & (df['volatile_acidity'] <= 0.64), 'volatile_acidity'] =3
+df.loc[df['volatile_acidity'] > 0.64, 'volatile_acidity'] =4
+
+df.loc[df['citric_acid']<= 0.00, 'citric_acid'] =0
+df.loc[(df['citric_acid'] > 0.00) & (df['citric_acid']<=0.09),'citric_acid'] =1
+df.loc[(df['citric_acid'] > 0.09) & (df['citric_acid']<=0.26), 'citric_acid'] =2
+df.loc[(df['citric_acid'] > 0.26) & (df['citric_acid'] <= 0.42), 'citric_acid'] =3
+df.loc[df['citric_acid'] > 0.42, 'citric_acid'] =4
+
+df.loc[df['residual_sugar']<= 0.90, 'residual_sugar'] =0
+df.loc[(df['residual_sugar'] > 0.90) & (df['residual_sugar']<=1.90),'residual_sugar'] =1
+df.loc[(df['residual_sugar'] > 1.90) & (df['residual_sugar']<=2.20), 'residual_sugar'] =2
+df.loc[(df['citric_acid'] > 2.20) & (df['citric_acid'] <= 2.60), 'residual_sugar'] =3
+df.loc[df['residual_sugar'] > 2.26, 'residual_sugar'] =4
+
+df.loc[df['chlorides']<= 0.01, 'chlorides'] =0
+df.loc[(df['chlorides'] > 0.01) & (df['chlorides']<=0.07),'chlorides'] =1
+df.loc[(df['chlorides'] > 0.07) & (df['chlorides']<=0.08), 'chlorides'] =2
+df.loc[(df['chlorides'] > 0.08) & (df['chlorides'] <= 0.09), 'chlorides'] =3
+df.loc[df['chlorides'] > 0.09, 'chlorides'] =4
+
+df.loc[df['free_sulfur_dioxide']<= 1.00, 'free_sulfur_dioxide'] =0
+df.loc[(df['free_sulfur_dioxide'] > 1.00) & (df['free_sulfur_dioxide']<=7.00),'free_sulfur_dioxide'] =1
+df.loc[(df['free_sulfur_dioxide'] > 7.00) & (df['free_sulfur_dioxide']<=14.00), 'free_sulfur_dioxide'] =2
+df.loc[(df['free_sulfur_dioxide'] > 14.00) & (df['free_sulfur_dioxide'] <= 21.00), 'free_sulfur_dioxide'] =3
+df.loc[df['free_sulfur_dioxide'] > 21.00, 'free_sulfur_dioxide'] =4
+
+df.loc[df['total_sulfur_dioxide']<= 6.00, 'total_sulfur_dioxide'] =0
+df.loc[(df['total_sulfur_dioxide'] > 6.00) & (df['total_sulfur_dioxide']<=22.00),'total_sulfur_dioxide'] =1
+df.loc[(df['total_sulfur_dioxide'] > 22.00) & (df['total_sulfur_dioxide']<=38.00), 'total_sulfur_dioxide'] =2
+df.loc[(df['total_sulfur_dioxide'] > 38.00) & (df['total_sulfur_dioxide'] <= 62.00), 'total_sulfur_dioxide'] =3
+df.loc[df['total_sulfur_dioxide'] > 62.00, 'total_sulfur_dioxide'] =4
+
+df.loc[df['density']<= 0.99, 'density'] =0
+df.loc[(df['density'] > 0.99) & (df['density']<=1.00),'density'] =1
+
+df.loc[df['pH']<= 2.74, 'pH'] =0
+df.loc[(df['pH'] > 2.74) & (df['pH']<=3.21),'pH'] =1
+df.loc[(df['pH'] > 3.21) & (df['pH']<=3.31), 'pH'] =2
+df.loc[(df['pH'] > 3.31) & (df['pH'] <= 3.40), 'pH'] =3
+df.loc[df['pH'] > 3.40, 'pH'] =4
+
+df.loc[df['sulphates']<= 0.33, 'sulphates'] =0
+df.loc[(df['sulphates'] > 0.33) & (df['sulphates']<=0.55),'sulphates'] =1
+df.loc[(df['sulphates'] > 0.55) & (df['sulphates']<=0.62), 'sulphates'] =2
+df.loc[(df['sulphates'] > 0.62) & (df['sulphates'] <= 0.73), 'sulphates'] =3
+df.loc[df['sulphates'] > 0.73, 'sulphates'] =4
+
+
+df.loc[df['alcohol']<= 8.40, 'alcohol'] =0
+df.loc[(df['alcohol'] > 8.40) & (df['alcohol']<=9.50),'alcohol'] =1
+df.loc[(df['alcohol'] > 9.50) & (df['alcohol']<=10.20), 'alcohol'] =2
+df.loc[(df['alcohol'] > 10.20) & (df['alcohol'] <= 11.10), 'alcohol'] =3
+df.loc[df['alcohol'] > 11.10, 'alcohol'] =4
+df.head()
+
+df.loc[df['quality']<= 7.00, 'quality'] =0
+df.loc[(df['quality'] > 7.00) & (df['quality']<=10.00),'quality'] =1
+
+print (round(df.describe(),2))
 
 # print (df.isnull().sum())
 # print(round(df.describe(),2))
@@ -51,26 +116,14 @@ plt.show()
 
 X = df.drop(['quality'], axis=1)
 
-
-for dataset in X:
-    dataset.loc[dataset['fixed_acidity']<= 4.60, 'fixed_acidity'] =0
-    dataset.loc[(dataset['fixed_acidity'] > 4.60) & (dataset['fixed_acidity']<=7.10),'fixed_acidity'] =1
-    dataset.loc[(dataset['fixed_acidity'] > 7.10) & (dataset['fixed_acidity']<=7.90), 'fixed_acidity'] =2
-    dataset.loc[(dataset['fixed_acidity'] > 7.90) & (dataset['fixed_acidity'] <= 9.20), 'fixed_acidity'] =3
-    dataset.loc[dataset['fixed_acidity'] > 9.20, 'fixed_acidity'] =4
-
-for dataset in X:
-    dataset.loc[dataset['free_sulfur_dioxide']<= 1.00, 'free_sulfur_dioxide'] =0
-    dataset.loc[(dataset['free_sulfur_dioxide'] > 1.00) & (dataset['free_sulfur_dioxide']<=7.00),'free_sulfur_dioxide'] =1
-    dataset.loc[(dataset['free_sulfur_dioxide'] > 7.00) & (dataset['free_sulfur_dioxide']<=14.00), 'free_sulfur_dioxide'] =2
-    dataset.loc[(dataset['free_sulfur_dioxide'] > 14.00) & (dataset['free_sulfur_dioxide'] <= 21.00), 'free_sulfur_dioxide'] =3
-    dataset.loc[dataset['free_sulfur_dioxide'] > 21.00, 'free_sulfur_dioxide'] =4
-df.head()
+X.info()
+print (X.isnull().values.any())
+print (X.isna().sum())
 
 y = df['quality']
 
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
 
 cols = X_train.columns
@@ -81,24 +134,26 @@ X_test = scaler.transform(X_test)
 X_train = pd.DataFrame(X_train, columns=[cols])
 X_test = pd.DataFrame(X_test, columns=[cols])
 
-knn = KNeighborsClassifier(n_neighbors=5)
+knn = KNeighborsClassifier(n_neighbors=3)
 knn.fit(X_train, y_train)
 y_pred = knn.predict(X_test)
 
-print('Model accuracy score: {0:0.4f}'. format(accuracy_score(y_test, y_pred)))
+rf = RandomForestClassifier(max_depth=3, min_samples_leaf=20, min_samples_split=20, random_state= 1, criterion='gini')
+rf.fit(X_train, y_train)
+y_pred1 = rf.predict(X_test)
 
-
-
+print('Model accuracy score of KNN: {0:0.4f}'. format(accuracy_score(y_test, y_pred)))
+print('Model accuracy score of RF: {0:0.4f}'. format(accuracy_score(y_test, y_pred1)))
 
 
 # def test_estimators(X, y, estimators, labels, cv):
 #     '''
 #     A function for testing multiple estimators.
-#     It takes: full train data and target, list of estimators,
-#               list of labels or names of estimators,
-#               cross validation splitting strategy;
-#     And it returns: a DataFrame of table with results of tests
-#     '''
+# #     It takes: full train data and target, list of estimators,
+# #               list of labels or names of estimators,
+# #               cross validation splitting strategy;
+# #     And it returns: a DataFrame of table with results of tests
+# #     '''
 #     result_table = pd.DataFrame()
 #
 #     row_index = 0
@@ -123,16 +178,11 @@ print('Model accuracy score: {0:0.4f}'. format(accuracy_score(y_test, y_pred)))
 #     return result_table
 #
 #
-#
-#
-#
-#
-#
 # lr = LogisticRegression()
 # dt = DecisionTreeClassifier(random_state=1)
 # rf = RandomForestClassifier(random_state=1)
-# svc = make_pipeline(StandardScaler(), SVC(probability=True))
-# knn = make_pipeline(StandardScaler(), KNeighborsClassifier())
+# svc = make_pipeline(MinMaxScaler(), SVC(probability=True))
+# knn = make_pipeline(MinMaxScaler(), KNeighborsClassifier())
 #
 # estimators = [lr,
 #               dt,
@@ -149,11 +199,11 @@ print('Model accuracy score: {0:0.4f}'. format(accuracy_score(y_test, y_pred)))
 # results = test_estimators(X_train, y_train, estimators, labels, cv=10)
 # results.style.background_gradient(cmap='Blues')
 #
-# rf_params = {'min_samples_leaf': pd.np.arange(20, 50, 5),
-#              'min_samples_split': pd.np.arange(20, 50, 5),
-#              'max_depth': pd.np.arange(3, 6),
-#              'min_weight_fraction_leaf': pd.np.arange(0, 0.4, 0.1),
-#              'criterion': ['gini', 'entropy']}
+# rf_params = {'min_samples_leaf': pd.np.arange(20),
+#              'min_samples_split': pd.np.arange(20),
+#              'max_depth': pd.np.arange(3),
+#              'min_weight_fraction_leaf': pd.np.arange(0),
+#              'criterion': ['gini']}
 #
 # grid = GridSearchCV(rf, rf_params, scoring='average_precision', cv=10, n_jobs=-1)
 #
@@ -163,5 +213,5 @@ print('Model accuracy score: {0:0.4f}'. format(accuracy_score(y_test, y_pred)))
 # print(grid.best_estimator_)
 # print(grid.best_params_)
 # print(grid.best_score_)
-
-#rf = RandomForestClassifier(**grid.best_params_)
+#
+# rf = RandomForestClassifier(**grid.best_params_)
